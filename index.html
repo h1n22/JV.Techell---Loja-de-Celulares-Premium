@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JV.Techell - Loja de Celulares Premium</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="header-container">
+      <div class="logo">
+        <h1>📱 JV.Techell</h1>
+      </div>
+      <div class="header-info">
+        <span>✅ Verificados</span>
+        <span>🔒 Seguro</span>
+        <span>💬 WhatsApp</span>
+      </div>
+      <button class="admin-btn" onclick="toggleAdminPanel()">⚙️ Admin</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="filters-section">
+    <h2>Filtrar por Marca</h2>
+    <div class="filters" id="filters"></div>
+  </section>
+
+  <section class="products-section">
+    <div class="products" id="products"></div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 TecBlog - Loja de Celulares | Todos os direitos reservados</p>
+  <p>Atendimento: WhatsApp | Envios para todo Brasil</p>
+</footer>
+
+<!-- MODAL DE LOGIN -->
+<div class="modal" id="loginModal">
+  <div class="modal-content login-modal-content">
+    <div class="login-header">
+      <h2>🔐 Acesso Admin</h2>
+    </div>
+    <div class="login-body">
+      <form onsubmit="validarSenha(event)">
+        <div class="form-group">
+          <label>Senha de Administrador</label>
+          <input type="password" id="senhaInput" placeholder="Digite a senha" required autofocus>
+        </div>
+        <div class="login-actions">
+          <button type="submit" class="btn-submit">🔓 Entrar</button>
+          <button type="button" class="btn-cancel" onclick="fecharLogin()">✕ Cancelar</button>
+        </div>
+        <p class="login-error" id="loginError"></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE EDIÇÃO -->
+<div class="modal" id="adminModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>📱 Painel de Administração</h2>
+      <button class="close-btn" onclick="toggleAdminPanel()">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <!-- ABAS -->
+      <div class="admin-tabs">
+        <button class="tab-btn active" onclick="switchTab('adicionar')">
+          <span class="tab-icon">➕</span>
+          <span class="tab-text">Adicionar</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('editar')">
+          <span class="tab-icon">✏️</span>
+          <span class="tab-text">Editar</span>
+        </button>
+      </div>
+
+      <!-- ABA ADICIONAR -->
+      <div class="tab-content active" id="adicionar-tab">
+        <form id="formAdicionar" onsubmit="adicionarCelular(event)">
+          <div class="form-group">
+            <label>Marca</label>
+            <select id="marcaNova" required>
+              <option value="">Selecione uma marca</option>
+              <option value="Apple">Apple</option>
+              <option value="Samsung">Samsung</option>
+              <option value="Xiaomi">Xiaomi</option>
+              <option value="Motorola">Motorola</option>
+              <option value="LG">LG</option>
+              <option value="ASUS">ASUS</option>
+              <option value="OnePlus">OnePlus</option>
+              <option value="Google">Google</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Nome do Celular</label>
+            <input type="text" id="nomeNovo" placeholder="Ex: iPhone 14" required>
+          </div>
+
+          <div class="form-group">
+            <label>Preço (R$)</label>
+            <input type="number" id="precoNovo" placeholder="Ex: 2200" required>
+          </div>
+
+          <div class="form-group">
+            <label>Estado</label>
+            <select id="estadoNovo" required>
+              <option value="Novo">Novo</option>
+              <option value="Usado">Usado</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Armazenamento</label>
+              <input type="text" id="armazenamentoNovo" placeholder="Ex: 128GB" required>
+            </div>
+            <div class="form-group">
+              <label>RAM</label>
+              <input type="text" id="ramNovo" placeholder="Ex: 4GB" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Bateria</label>
+              <input type="text" id="bateriaNovo" placeholder="Ex: 3110 mAh" required>
+            </div>
+            <div class="form-group">
+              <label>Câmera</label>
+              <input type="text" id="cameraNovo" placeholder="Ex: 12MP" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Observações</label>
+            <textarea id="obsNovo" placeholder="Ex: Revisado, excelente estado" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>URL da Imagem</label>
+            <input type="text" id="imagemNovo" placeholder="Ex: imagens/iphone14.jpg" value="imagens/placeholder.jpg">
+          </div>
+
+          <button type="submit" class="btn-submit">✅ Adicionar Celular</button>
+        </form>
+      </div>
+
+      <!-- ABA EDITAR -->
+      <div class="tab-content" id="editar-tab">
+        <div class="products-list" id="productsEditList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
